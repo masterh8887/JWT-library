@@ -1,7 +1,6 @@
 "use strict";
 
-export function encode(str: string) {
-  console.log(encode.prototype);
+export function encode(str: string): string {
   if (
     Buffer.byteLength(str) !== str.length ||
     Buffer.byteLength(str) === 0 ||
@@ -12,7 +11,7 @@ export function encode(str: string) {
   return Buffer.from(str, "binary").toString("base64");
 }
 
-export function toUrlEncode(str: string) {
+export function toUrlEncode(str: string): string {
   if (
     Buffer.byteLength(str) !== str.length ||
     Buffer.byteLength(str) === 0 ||
@@ -23,7 +22,7 @@ export function toUrlEncode(str: string) {
   return str.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
 }
 
-export function decode(str: string) {
+export function decode(str: string): string {
   if (
     Buffer.byteLength(str) !== str.length ||
     Buffer.byteLength(str) === 0 ||
@@ -34,7 +33,7 @@ export function decode(str: string) {
   return Buffer.from(str, "base64").toString();
 }
 
-export function toBase64(str: string) {
+export function toBase64(str: string): string {
   if (
     Buffer.byteLength(str) !== str.length ||
     Buffer.byteLength(str) === 0 ||
