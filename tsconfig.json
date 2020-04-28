@@ -1,0 +1,35 @@
+{
+      
+   "compilerOptions": {
+      // 기본 타입 정의 라이브러리 정의
+      "lib": [
+         "es5",
+         "es6"
+      ],
+      // 결과물을 어떤 버전으로 할지 정의
+      "target": "ES6",
+      // 컴파일 된 모듈의 결과물을 어떤 모듈 시스템으로 할 것인지 정의
+      "module": "commonjs",
+      // ts소스에서 모듈의 사용하는 방식
+      "moduleResolution": "node",
+      // ts 타입 체크를 엄격하게 할 것인지 세팅, 다른 옵션도 있음.
+      "strict": true,
+      // 컴파일된 js파일은 어디에 위치할 것인지
+      "outDir": "./dist",
+      
+      // TypeORM 사용 시에 decoration 관련 옵션
+      "emitDecoratorMetadata": true,
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "sourceMap": true
+   },
+   // 어디에 있는 파일들을 컴파일 할 것인지
+   "include": [
+     "index.ts",
+     //"src/**/*"
+   ],
+   "exclude": [
+      "node_module"
+    ]
+
+ }
