@@ -1,5 +1,5 @@
 //import * as base64 from "./lib/base64";
-import * as Base64 from "./lib/base64_class";
+import * as Base64 from "./lib/base64";
 import crypto from "crypto";
 
 // header object 세팅
@@ -18,28 +18,25 @@ const payload: any = {
 // seacreatKey 플레인 텍스트
 const seacretKey: string = "your-256-bit-secret";
 
-// header base64urlencode
-const encodeHeader: string = Base64.encode(JSON.stringify(header));
+// header base64encode
+const basicHeader: string = Base64.encode(JSON.stringify(header));
+// header base64URLencode
+const urlEncodeHeader: string = Base64.toUrlEncode(basicHeader);
 
-// // payload base64urlencode
-// const encodePayload: string = base64UrlEncode(JSON.stringify(payload));
+console.log(`urlEncodeHeader =  ${urlEncodeHeader}`);
 
-// const hmac = crypto.createHmac("sha256", seacretKey);
-// hmac.update(`${encodeHeader}.${encodePayload}`);
-// console.log(hmac.digest("base64"));
+// payload base64encode
+const basicPayload: string = Base64.encode(JSON.stringify(payload));
+// payload base64URLencode
+const urlEncodePayload: string = Base64.toUrlEncode(basicPayload);
+console.log(`urlEncodePayload =  ${urlEncodePayload}`);
 
-//const signature : string = atob(hmacSHA256(`${encodeHeader}.${encodePayload}`, seacretKey));
+const hmac = crypto.createHmac("sha256", seacretKey);
+const signature = Base64.toUrlEncode(
+  hmac.update(`${urlEncodeHeader}.${urlEncodePayload}`).digest("base64")
+);
+console.log(`signature =  ${signature}`);
 
-//   console.log(encodePayload);
+const token = `${urlEncodeHeader}.${urlEncodePayload}.${signature}`;
 
-//  // payload base64urlencode
-// const urlEncodePayload = encodePayload.replace(/=/g, "")
-//  .replace(/\+/g, "-")
-//  .replace(/\//g, "_")
-
-// const test = '{"alg":"HS256","typ":"JWT"}';
-// //const test = '';
-// const encodeTest = base64Encode(test);
-// const decodeTest = base64Decode(encodeTest);
-// console.log(`encodeTest = ${encodeTest}`);
-// console.log(`decodeTest = ${decodeTest}`);
+console.log(`token =  ${token}`);
